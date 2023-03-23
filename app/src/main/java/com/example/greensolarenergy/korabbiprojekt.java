@@ -22,7 +22,8 @@ public class korabbiprojekt extends AppCompatActivity {
     ArrayList<String> listItem;
     ArrayAdapter adapter;
     Button toroltbtnkorabb;
-    EditText idmegad;
+    EditText idmegad,hahc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
