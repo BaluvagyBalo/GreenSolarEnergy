@@ -54,7 +54,7 @@ public class ujfelmeres extends AppCompatActivity {
         inverterData();
 
 
-       // int darab= Integer.valueOf(paneldarab.getText().toString());
+      //  int darab= Integer.valueOf(paneldarab.getText().toString());
 
     panel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

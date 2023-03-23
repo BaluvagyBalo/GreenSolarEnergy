@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +21,8 @@ public class korabbiprojekt extends AppCompatActivity {
 
     ArrayList<String> listItem;
     ArrayAdapter adapter;
+    Button toroltbtnkorabb;
+    EditText idmegad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +32,20 @@ public class korabbiprojekt extends AppCompatActivity {
         //adatbazis kapcsolat
          databaseHandler =new DatabaseHandler(this);
 
+         toroltbtnkorabb=findViewById(R.id.torolbtnkorabb);
+         idmegad=findViewById(R.id.idmegad);
 
         listItem = new ArrayList<>();
         listkorabbip=findViewById(R.id.projekt);
 
         viewData();
 
+        toroltbtnkorabb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseHandler.deleteMegrendelesek(Integer.valueOf(idmegad.getText().toString().trim()));
+            }
+        });
 
     }
 

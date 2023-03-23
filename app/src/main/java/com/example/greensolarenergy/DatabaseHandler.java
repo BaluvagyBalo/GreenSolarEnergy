@@ -178,4 +178,16 @@ public void onCreate(SQLiteDatabase db) {
         return cur;
     }
 
+    //törles serialnumber alapjan Megrendesesk
+    void deleteMegrendelesek(int serialNumber){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TABLE_NAME2, ID + "=?", new String[]{String.valueOf(serialNumber)});
+        if(result == 0){
+            Toast.makeText(context,"Sikertelen",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
+        }
+        db.close();
+    }
+
 }

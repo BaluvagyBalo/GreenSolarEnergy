@@ -19,11 +19,47 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="44dp" />
+        android:layout_height="19dp" />
 
     <ListView
         android:id="@+id/projekt"
         android:layout_width="match_parent"
-        android:layout_height="582dp"
-        android:background="#85171616" />
+        android:layout_height="552dp"
+        android:background="#85171616" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#090606" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:background="#85171616">
+
+        <EditText
+            android:id="@+id/idmegad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/torolbtnkorabb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Töröl" />
+    </TableRow>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/pngegg" />
+
 </LinearLayout>
