@@ -25,7 +25,11 @@ public class ujfelmeres extends AppCompatActivity {
     DatabaseHandler databaseHandler;
     TextView osszesen, kabel,inverterar,panelar;
     EditText csaladnev,paneldarab;
-    Button ajanlat;
+    Button ajanlat,ajanlatkerest;
+
+    int pan;
+    int in;
+
 
     ArrayList<String> listItem2, listItem3;
     ArrayAdapter adapter2,adapter3;
@@ -40,6 +44,7 @@ public class ujfelmeres extends AppCompatActivity {
         osszesen= findViewById(R.id.osszesen);
         csaladnev= findViewById(R.id.csaladnav);
         ajanlat= findViewById(R.id.ajanlat);
+        ajanlatkerest=findViewById(R.id.ajanlatkeres);
        //szamolas
 
         paneldarab=findViewById(R.id.paneldarab);
@@ -53,8 +58,10 @@ public class ujfelmeres extends AppCompatActivity {
         solarData();
         inverterData();
 
+       // String sdarabText = paneldarab.getText().toString();
 
-      //  int darab= Integer.valueOf(paneldarab.getText().toString());
+
+    //   darab= Integer.parseInt(sdarabText);
 
     panel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,18 +70,22 @@ public class ujfelmeres extends AppCompatActivity {
 
 
                 String arak = adapter2.getItem(position).toString();
-                String[] separated= arak.split("Price:");
+                String[] separated= arak.split("Price: ");
 
-          //      int dbar= Integer.parseInt(paneldarab.getText().toString());
+                int dbar= Integer.parseInt(paneldarab.getText().toString().trim());
+
 
                 String uj= separated[1];
 
-             //   Integer egydar= Integer.valueOf(uj);
-               // int sorsz_uj=Integer.parseInt(uj);
-     //  panelar.setText(dbar+"");
+                //
+                int egydar= Integer.parseInt(separated[1]);
+             //   int sorsz_uj=Integer.parseInt(uj);
+       //panelar.setText(dbar+"");
 
-           //     int o=(egydar)*(dbar);
-               panelar.setText(uj);
+                int o=(egydar)*(dbar);
+               panelar.setText(Integer.toString(o));
+
+             //   panelar.setText(uj);
 
             }
         });
@@ -90,7 +101,7 @@ public class ujfelmeres extends AppCompatActivity {
                 // string arak = cursor.getString( 1);
 
                 String arak2 = adapter3.getItem(position).toString();
-                String[] separated2= arak2.split("Price:");
+                String[] separated2= arak2.split("Price: ");
 
 
 
@@ -115,14 +126,23 @@ public class ujfelmeres extends AppCompatActivity {
        // int number= panalarint*i;
      //   panelar.setText((p+""));
 
+
         int kabelar= 110;
         kabel.setText(kabelar+"");
 
-     /*   int pan= Integer.valueOf(panelar.getText().toString());
-        int in= Integer.valueOf(inverterar.getText().toString());
-        int vege= kabelar+pan+in;*/
 
-        osszesen.setText(kabelar+"" );
+        ajanlatkerest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pan= Integer.valueOf(panelar.getText().toString());
+                in= Integer.valueOf(inverterar.getText().toString());
+                int vege= kabelar+pan+in;
+
+                osszesen.setText(vege+"" );
+            }
+        });
+
+
 
 
 

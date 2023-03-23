@@ -159,7 +159,7 @@
                     android:layout_width="205dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Ft"
+                    android:text="€"
                     android:textColor="#121111"
                     android:textSize="20dp" />
             </TableRow>
@@ -205,7 +205,7 @@
                     android:layout_width="205dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Ft"
+                    android:text="€"
                     android:textColor="#050505"
                     android:textSize="20dp" />
             </TableRow>
@@ -236,7 +236,7 @@
                     android:layout_width="202dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Ft"
+                    android:text="€"
                     android:textColor="#040303"
                     android:textSize="20dp" />
             </TableRow>
@@ -272,19 +272,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Ft"
+                    android:text="€"
                     android:textColor="#040303"
                     android:textSize="20dp" />
             </TableRow>
 
+            <Button
+                android:id="@+id/ajanlatkeres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Árkalkuláció" />
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="22dp" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/ajanlat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_light"
                 android:text="Árajánlat mentése" />
 
         </LinearLayout>
