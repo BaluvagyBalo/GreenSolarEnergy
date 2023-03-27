@@ -18,8 +18,8 @@ import java.util.List;
 
 public class raktar extends AppCompatActivity {
 
-    EditText megnevezes, elhelyezkedes, darab, ar,id;
-    Button hozzaad, listaz, torolmodosit;
+    EditText megnevezes, elhelyezkedes, darab, ar,id, idmodosit,armodosit;
+    Button hozzaad, listaz, torolmodosit,modosit;
    TextView text;
    ListView lista;
     DatabaseHandler raktarDB;
@@ -37,6 +37,11 @@ public class raktar extends AppCompatActivity {
         hozzaad= findViewById(R.id.hozzaadasbtn);
         listaz =findViewById(R.id.listazasbtn);
 
+        //modify
+        idmodosit=findViewById(R.id.idmodosit);
+        armodosit=findViewById(R.id.armododsit);
+        modosit=findViewById(R.id.modosit);
+
         torolmodosit = findViewById(R.id.torolmodosbtn);
         id =findViewById(R.id.id2);
         lista=findViewById(R.id.lista);
@@ -44,6 +49,7 @@ public class raktar extends AppCompatActivity {
 
         //adatbazis kapcsolat
          raktarDB =new DatabaseHandler(this);
+
 
         hozzaad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +77,13 @@ public class raktar extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 raktarDB.deleteRaktarData( Integer.valueOf(id.getText().toString().trim()));
+            }
+        });
+
+        modosit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                raktarDB.modifydata(Integer.valueOf(idmodosit.getText().toString().trim()),Integer.valueOf(armodosit.getText().toString().trim()));
             }
         });
 

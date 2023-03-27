@@ -22,7 +22,7 @@ public class korabbiprojekt extends AppCompatActivity {
     ArrayList<String> listItem;
     ArrayAdapter adapter;
     Button toroltbtnkorabb;
-    EditText idmegad,hahc;
+    EditText idmegad;
 
 
     @Override

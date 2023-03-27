@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
                 if(username.getText().toString().equals("admin")&& password.getText().toString().equals("1234")){
                     Intent intentLoadNewActivity = new Intent(MainActivity.this,MainActivity2.class);
                     startActivity(intentLoadNewActivity);
-                }else{
+                }
+
+                else{
                     Toast.makeText(MainActivity.this,"Bejelentkezés sikertelen!",Toast.LENGTH_SHORT).show();
                     btn.setEnabled(false);
                 }

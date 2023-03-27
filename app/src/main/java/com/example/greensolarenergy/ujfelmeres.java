@@ -23,12 +23,13 @@ public class ujfelmeres extends AppCompatActivity {
 
     ListView inverter, panel;
     DatabaseHandler databaseHandler;
-    TextView osszesen, kabel,inverterar,panelar;
+    TextView osszesen, kabel,inverterar,panelar, ora,munkadij;
     EditText csaladnev,paneldarab;
     Button ajanlat,ajanlatkerest;
 
     int pan;
     int in;
+    int dbar;
 
 
     ArrayList<String> listItem2, listItem3;
@@ -52,6 +53,9 @@ public class ujfelmeres extends AppCompatActivity {
         inverterar=findViewById(R.id.inverterar);//inverter csak 1 van rendszerhez illően
         kabel=findViewById(R.id.rogzitokkabelar);
 
+        ora=findViewById(R.id.ora);
+        munkadij=findViewById(R.id.munkadij);
+
 
         listItem2 = new ArrayList<>();
         listItem3 = new ArrayList<>();
@@ -72,7 +76,7 @@ public class ujfelmeres extends AppCompatActivity {
                 String arak = adapter2.getItem(position).toString();
                 String[] separated= arak.split("Price: ");
 
-                int dbar= Integer.parseInt(paneldarab.getText().toString().trim());
+                 dbar= Integer.parseInt(paneldarab.getText().toString().trim());
 
 
                 String uj= separated[1];
@@ -127,16 +131,28 @@ public class ujfelmeres extends AppCompatActivity {
      //   panelar.setText((p+""));
 
 
-        int kabelar= 110;
-        kabel.setText(kabelar+"");
+
 
 
         ajanlatkerest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //kabel, kapcsolo
+                int kabelar= 80;
+                int dbz= Integer.parseInt(paneldarab.getText().toString().trim());
+                 int v= kabelar*dbz;
+                kabel.setText(v+"");
+                //munkaido, munka ora
+
+                int ido= 1*dbz;
+                int munkaar= dbz*100;
+
+                ora.setText(ido+"");
+                munkadij.setText(munkaar+"");
+
                 pan= Integer.valueOf(panelar.getText().toString());
                 in= Integer.valueOf(inverterar.getText().toString());
-                int vege= kabelar+pan+in;
+                int vege= kabelar+pan+in+ido+munkaar;
 
                 osszesen.setText(vege+"" );
             }

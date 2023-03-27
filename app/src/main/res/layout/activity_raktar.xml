@@ -8,24 +8,11 @@
     android:orientation="vertical"
     tools:context=".raktar">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Raktár"
-        android:textColor="#040303"
-        android:textSize="25dp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="311dp"
         android:background="#8F424040"
         android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
 
         <EditText
             android:id="@+id/megnevez"
@@ -87,13 +74,15 @@
                 android:ems="10"
                 android:hint="Törles id"
                 android:inputType="number"
-                android:textColor="#0B0A0A" />
+                android:textColor="#0B0A0A"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/torolmodosbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="torol" />
+                android:text="torol"
+                tools:ignore="TouchTargetSizeCheck" />
         </TableRow>
     </LinearLayout>
 
@@ -102,6 +91,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Raktár kilistazasa" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:background="#8F424040"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/idmodosit"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="id"
+            android:inputType="textPersonName"
+            android:textColor="#0B0A0A"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/armododsit"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="ar"
+            android:inputType="textPersonName"
+            android:textColor="#0B0A0A"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/modosit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="modosít"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </TableRow>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#121010" />
 
     <ListView
         android:id="@+id/lista"

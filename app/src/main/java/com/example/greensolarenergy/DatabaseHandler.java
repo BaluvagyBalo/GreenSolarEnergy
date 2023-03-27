@@ -178,6 +178,7 @@ public void onCreate(SQLiteDatabase db) {
         return cur;
     }
 
+
     //törles serialnumber alapjan Megrendesesk
     void deleteMegrendelesek(int serialNumber){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -187,6 +188,26 @@ public void onCreate(SQLiteDatabase db) {
         }else{
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
+        db.close();
+    }
+
+
+    //
+
+    void modifydata(int serialNumber, int price){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+
+
+        db.execSQL("UPDATE "+TABLE_NAME+" SET AR = "+"'"+price+"' "+ "WHERE SERIALNUMBER = "+"'"+serialNumber+"'");
+
+      /*  if(result == 0){
+            Toast.makeText(context,"Sikertelen",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
+        }*/
+
         db.close();
     }
 

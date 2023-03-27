@@ -65,7 +65,7 @@
                     <EditText
                         android:id="@+id/csaladnav"
                         android:layout_width="400dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:ems="10"
                         android:hint="nev"
                         android:inputType="textPersonName"
@@ -129,7 +129,7 @@
             <ListView
                 android:id="@+id/panellista"
                 android:layout_width="match_parent"
-                android:layout_height="298dp" >
+                android:layout_height="400dp">
 
             </ListView>
 
@@ -175,7 +175,7 @@
             <ListView
                 android:id="@+id/inverterlista"
                 android:layout_width="match_parent"
-                android:layout_height="249dp">
+                android:layout_height="400dp">
 
             </ListView>
 
@@ -210,6 +210,10 @@
                     android:textSize="20dp" />
             </TableRow>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
             <TextView
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
@@ -241,9 +245,58 @@
                     android:textSize="20dp" />
             </TableRow>
 
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Munkaido Munkadij"
+                android:textColor="#035006"
+                android:textSize="20dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/ora"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#E30606"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="óra"
+                    android:textColor="#040303"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/munkadij"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#E30606"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="102dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="€"
+                    android:textColor="#040303"
+                    android:textSize="20dp" />
+            </TableRow>
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="26dp" />
+                android:layout_height="29dp" />
 
             <TableRow
                 android:layout_width="match_parent"
