@@ -2,6 +2,8 @@ package com.example.greensolarenergy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -23,7 +25,7 @@ public class korabbiprojekt extends AppCompatActivity {
     ArrayAdapter adapter;
     Button toroltbtnkorabb;
     EditText idmegad;
-
+    SharedPreferences sharedPref_k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,15 @@ public class korabbiprojekt extends AppCompatActivity {
 
         listItem = new ArrayList<>();
         listkorabbip=findViewById(R.id.projekt);
+
+        //jogosultsagok
+        sharedPref_k = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String Userf = sharedPref_k.getString(getString(R.string.last_user_key), "");
+
+        if(Userf.equals("felmero")){
+            toroltbtnkorabb.setEnabled(false);
+        }
+
 
         viewData();
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">greensolarenergy</string>
+
+
+    <string name="last_user_key">last_user</string>
+    <string name="preference_file_key">my_app_preferences</string>
+
 </resources>

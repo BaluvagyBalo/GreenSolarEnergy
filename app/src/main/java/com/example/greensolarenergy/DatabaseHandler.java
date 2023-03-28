@@ -26,6 +26,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME2 ="megrendelesek";
 
+    private  static  final String TABLE_NAME3="termekrendeles";
+
     //Table Fields
     private  static  final String SERIALNUMBER = "Serialnumber";
     private static  final String MEGNEVEZES= "Megnevezes";
@@ -38,6 +40,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static  final String MEGRENDELO= "Megrendelo";
     private static  final String Datum ="Datum";
     private  static  final  String osszeg= "Osszeg";
+
+    //Table 3
+    private  static  final String azon = "Azon";
+    private static  final String szemely= "Szemely";
+    private static  final String TERMEK ="Termek";
+    private  static  final  String DARAB= "Darab";
 
 
 
@@ -55,6 +63,8 @@ public void onCreate(SQLiteDatabase db) {
     db.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+SERIALNUMBER+" INTEGER PRIMARY KEY, "+MEGNEVEZES+" TEXT,"+DARABSZAM+ " INTEGER, "+AR+" INTEGER,"+ELHELYEZKEDES+" TEXT)");
 
     db.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+ID+" INTEGER PRIMARY KEY, "+MEGRENDELO+" TEXT,"+Datum+ " TEXT, "+osszeg+" INTEGER)");
+
+    db.execSQL("CREATE TABLE "+TABLE_NAME3+" ( "+azon+" INTEGER PRIMARY KEY, "+szemely+" TEXT,"+TERMEK+ " TEXT, "+DARAB+" INTEGER)");
 }
 
     @Override
@@ -63,6 +73,7 @@ public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME2);
 
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME3);
 
         onCreate(db);
   }
@@ -108,6 +119,26 @@ public void onCreate(SQLiteDatabase db) {
     }
 
 
+    //hozzaad a termekrendeleshez
+
+
+    void addtermekrendel(String megrendelo, String termek, int darab) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(szemely, megrendelo);
+        cv.put(TERMEK, termek);
+        cv.put(DARAB, darab);
+
+        long result = db.insert(TABLE_NAME3, null, cv);
+        if(result == -1) {
+            Toast.makeText(context, "Sikertelen", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Sikeres", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 
     //kiir
 

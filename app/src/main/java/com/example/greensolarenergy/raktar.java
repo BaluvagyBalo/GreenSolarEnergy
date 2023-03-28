@@ -2,7 +2,9 @@ package com.example.greensolarenergy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +27,7 @@ public class raktar extends AppCompatActivity {
     DatabaseHandler raktarDB;
     ArrayList<String> listItemraktar;
     ArrayAdapter adapterraktar;
+    SharedPreferences sharedPrefr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,19 @@ public class raktar extends AppCompatActivity {
 
         //adatbazis kapcsolat
          raktarDB =new DatabaseHandler(this);
+
+         //jogosultsagok
+        sharedPrefr = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        String User = sharedPrefr.getString(getString(R.string.last_user_key), "");
+
+        if(User.equals("raktaros")){
+            hozzaad.setEnabled(false);
+            torolmodosit.setEnabled(false);
+            modosit.setEnabled(false);
+
+        }
+
+
 
 
         hozzaad.setOnClickListener(new View.OnClickListener() {

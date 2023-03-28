@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backk"
+    tools:context=".alkatresz_rendel">
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Alkatrészek rendelésre"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        app:srcCompat="@drawable/inverter" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        app:srcCompat="@drawable/pvmodul" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="17dp" />
+
+    <EditText
+        android:id="@+id/megrendelo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#86171515"
+        android:ems="10"
+        android:hint="Megrendelő"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/termek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#86171515"
+        android:ems="10"
+        android:hint="Termék"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/darabszamok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#86171515"
+        android:ems="10"
+        android:hint="Darabszám"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/megrendel_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Megrendel" />
+
+</LinearLayout>

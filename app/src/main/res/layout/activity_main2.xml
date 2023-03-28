@@ -10,7 +10,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="12dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -26,11 +26,24 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="55dp" />
+        android:layout_height="12dp" />
+
+    <TextView
+        android:id="@+id/felhasznalo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#F40606"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="12dp" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="549dp"
+        android:layout_height="413dp"
         android:gravity="center">
 
         <TableRow
@@ -117,14 +130,50 @@
                 android:id="@+id/keszprojektbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                app:srcCompat="@drawable/ic_baseline_done_24" />
+                app:srcCompat="@drawable/ic_baseline_done_24"
+                tools:ignore="SpeakableTextPresentCheck" />
         </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="163dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:text="Alkatrészek rendelése:"
+                android:textColor="#0B0A0A"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/rendel"
+                android:layout_width="wrap_content"
+                android:layout_height="58dp"
+                app:srcCompat="@drawable/ic_baseline_reorder_24"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </TableRow>
+
     </TableLayout>
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="108dp"
         app:srcCompat="@drawable/pngegg" />
 
 </LinearLayout>

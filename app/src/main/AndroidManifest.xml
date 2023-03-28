@@ -4,13 +4,15 @@
 
     <application
         android:allowBackup="true"
+        android:exported="true"
         android:icon="@drawable/logo"
         android:label="GreenSolar"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Greensolarenergy"
-        android:exported="true"
-        >
+        android:theme="@style/Theme.Greensolarenergy">
+        <activity
+            android:name=".alkatresz_rendel"
+            android:exported="true" />
         <activity
             android:name=".korabbiprojekt"
             android:exported="true" />
