@@ -94,7 +94,6 @@ public void onCreate(SQLiteDatabase db) {
 
       }else{
           Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
-
       }
   }
 
