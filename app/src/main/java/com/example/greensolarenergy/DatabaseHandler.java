@@ -10,7 +10,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -48,6 +55,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private  static  final  String DARAB= "Darab";
 
 
+    private Retrofit retrofit;
+    private RetroInterface retroInterface;
+    private String BASE_URL = "http://10.0.2.2:3000";
+
 
     SQLiteDatabase database;
 
@@ -56,16 +67,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     this.context = context;
     database = this.getWritableDatabase();
 
- }
+   }
 
-@Override
-public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+SERIALNUMBER+" INTEGER PRIMARY KEY, "+MEGNEVEZES+" TEXT,"+DARABSZAM+ " INTEGER, "+AR+" INTEGER,"+ELHELYEZKEDES+" TEXT)");
 
-    db.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+ID+" INTEGER PRIMARY KEY, "+MEGRENDELO+" TEXT,"+Datum+ " TEXT, "+osszeg+" INTEGER)");
 
-    db.execSQL("CREATE TABLE "+TABLE_NAME3+" ( "+azon+" INTEGER PRIMARY KEY, "+szemely+" TEXT,"+TERMEK+ " TEXT, "+DARAB+" INTEGER)");
-}
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+SERIALNUMBER+" INTEGER PRIMARY KEY, "+MEGNEVEZES+" TEXT,"+DARABSZAM+ " INTEGER, "+AR+" INTEGER,"+ELHELYEZKEDES+" TEXT)");
+
+        db.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+ID+" INTEGER PRIMARY KEY, "+MEGRENDELO+" TEXT,"+Datum+ " TEXT, "+osszeg+" INTEGER)");
+
+        db.execSQL("CREATE TABLE "+TABLE_NAME3+" ( "+azon+" INTEGER PRIMARY KEY, "+szemely+" TEXT,"+TERMEK+ " TEXT, "+DARAB+" INTEGER)");
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -76,7 +89,7 @@ public void onCreate(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME3);
 
         onCreate(db);
-  }
+   }
 
    //hozzaad a raktarthoz
   void addraktar(String megnevezes,int darab, int ar,String elhelyez){
@@ -88,6 +101,7 @@ public void onCreate(SQLiteDatabase db) {
       cv.put(AR,ar);
       cv.put(ELHELYEZKEDES,elhelyez);
 
+
       long result = db.insert(TABLE_NAME,null,cv);
       if(result == -1){
           Toast.makeText(context,"Sikertelen",Toast.LENGTH_SHORT).show();
@@ -95,7 +109,40 @@ public void onCreate(SQLiteDatabase db) {
       }else{
           Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
       }
-  }
+
+
+      retrofit = new Retrofit.Builder()
+              .baseUrl(BASE_URL)
+              .addConverterFactory(GsonConverterFactory.create())
+              .build();
+
+      retroInterface = retrofit.create(RetroInterface.class);
+
+      HashMap<String, String> map = new HashMap<>();
+
+      map.put("megnevezes", megnevezes);
+      map.put("darabszam", Integer.toString(darab));
+      map.put("ar", Integer.toString(ar));
+      map.put("elhelyezkedes", elhelyez);
+
+      Call<Void> call = retroInterface.execute(map);
+
+      call.enqueue(new Callback<Void>() {
+          @Override
+          public void onResponse(Call<Void> call, Response<Void> response) {
+              if (response.code() == 200) {
+                  Toast.makeText(context, "yeah", Toast.LENGTH_LONG).show();
+              } else {
+                  Toast.makeText(context, "fuck", Toast.LENGTH_LONG).show();
+              }
+          }
+
+          @Override
+          public void onFailure(Call<Void> call, Throwable t) {
+              Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+          }
+      });
+   }
 
    // hozzaad megrendelesek
 

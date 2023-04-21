@@ -18,6 +18,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class raktar extends AppCompatActivity {
 
     EditText megnevezes, elhelyezkedes, darab, ar,id, idmodosit,armodosit;
