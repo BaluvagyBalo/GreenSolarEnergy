@@ -48,6 +48,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static  final String Datum ="Datum";
     private  static  final  String osszeg= "Osszeg";
 
+    private static final String Statusz = "Statusz";
+
     //Table 3
     private  static  final String azon = "Azon";
     private static  final String szemely= "Szemely";
@@ -75,7 +77,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+TABLE_NAME+" ( "+SERIALNUMBER+" INTEGER PRIMARY KEY, "+MEGNEVEZES+" TEXT,"+DARABSZAM+ " INTEGER, "+AR+" INTEGER,"+ELHELYEZKEDES+" TEXT)");
 
-        db.execSQL("CREATE TABLE "+TABLE_NAME2+" ( "+ID+" INTEGER PRIMARY KEY, "+MEGRENDELO+" TEXT,"+Datum+ " TEXT, "+osszeg+" INTEGER)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME2 + " ( " + ID + " INTEGER PRIMARY KEY, " + MEGRENDELO + " TEXT, " + Datum + " TEXT, " + osszeg + " INTEGER, " + Statusz + " TEXT)");
 
         db.execSQL("CREATE TABLE "+TABLE_NAME3+" ( "+azon+" INTEGER PRIMARY KEY, "+szemely+" TEXT,"+TERMEK+ " TEXT, "+DARAB+" INTEGER)");
     }
@@ -153,6 +155,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cv.put(MEGRENDELO, megrendelo);
         cv.put(Datum, datum);
         cv.put(osszeg, arak);
+        cv.put(Statusz, "Rögzítve");;
 
         long result = db.insert(TABLE_NAME2, null, cv);
         if(result == -1) {
@@ -162,10 +165,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         Log.d("DatabaseHandler", "addMegrendeles result: " + result);
-
-
-
-
 
 
         retrofit = new Retrofit.Builder()
@@ -333,6 +332,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         db.close();
     }
+
+    void projektinditas(int serialNumber){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Statusz, "Folyamatban");
+
+        int result = db.update(TABLE_NAME2, values, ID + "=?", new String[]{String.valueOf(serialNumber)});
+
+        if(result == 0){
+            Toast.makeText(context,"Sikertelen",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
+        }
+        db.close();
+    }
+
+    void projektlezaras(int serialNumber){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Statusz, "Lezárva");
+
+        int result = db.update(TABLE_NAME2, values, ID + "=?", new String[]{String.valueOf(serialNumber)});
+
+        if(result == 0){
+            Toast.makeText(context,"Sikertelen",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
+        }
+        db.close();
+    }
+
+
 
 
     //

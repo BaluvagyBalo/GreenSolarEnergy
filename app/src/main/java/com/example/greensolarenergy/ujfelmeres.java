@@ -120,9 +120,10 @@ public class ujfelmeres extends AppCompatActivity {
         ajanlat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseHandler.addMegrendeles(csaladnev.getText().toString().trim(),getCurrentDate(),Integer.valueOf(osszesen.getText().toString().trim()));
+                databaseHandler.addMegrendeles(csaladnev.getText().toString().trim(), getCurrentDate(), Integer.valueOf(osszesen.getText().toString().trim()));
             }
         });
+
 
       //  String h= panelid.getText().toString();
      //   int p= Integer.valueOf(panelid.getText().toString());

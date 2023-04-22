@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.view.View;
+
 
 import java.util.ArrayList;
 
@@ -26,9 +28,12 @@ public class korabbiprojekt extends AppCompatActivity {
     Button toroltbtnkorabb;
     EditText idmegad;
     SharedPreferences sharedPref_k;
+    Button startProjectButton;
+    Button endProjectButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_korabbiprojekt);
 
@@ -36,6 +41,8 @@ public class korabbiprojekt extends AppCompatActivity {
          databaseHandler =new DatabaseHandler(this);
 
          toroltbtnkorabb=findViewById(R.id.torolbtnkorabb);
+         startProjectButton=findViewById(R.id.start_project_button);
+         endProjectButton=findViewById(R.id.end_project_button);
          idmegad=findViewById(R.id.idmegad);
 
         listItem = new ArrayList<>();
@@ -55,27 +62,49 @@ public class korabbiprojekt extends AppCompatActivity {
         toroltbtnkorabb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"Projekt törölve",Toast.LENGTH_SHORT).show();
                 databaseHandler.deleteMegrendelesek(Integer.valueOf(idmegad.getText().toString().trim()));
+                viewData();
+            }
+        });
+
+
+        startProjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Projekt kiválasztva kivételezéshez",Toast.LENGTH_SHORT).show();
+                databaseHandler.projektinditas(Integer.valueOf(idmegad.getText().toString().trim()));
+                viewData();
+            }
+        });
+
+        endProjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Projekt lezárva",Toast.LENGTH_SHORT).show();
+                databaseHandler.projektlezaras(Integer.valueOf(idmegad.getText().toString().trim()));
+                viewData();
             }
         });
 
     }
 
-
     public void viewData(){
-        Cursor cursor= databaseHandler.viewData();
+        Cursor cursor = databaseHandler.viewData();
 
         if(cursor.getCount() == 0){
             Toast.makeText(this,"NINCS ADAT",Toast.LENGTH_SHORT).show();
-
-        }else{
+        } else {
+            listItem.clear(); // Törli a listItem listát
             while(cursor.moveToNext()){
-
-               listItem.add("ID: "+ cursor.getString(0)+" Name: "+cursor.getString(1)+" Datum: "+cursor.getString(2)+" Price: "+cursor.getString(3));
-
+                listItem.add("ID: "+ cursor.getString(0)+" Name: "+cursor.getString(1)+" Datum: "+cursor.getString(2)+" Price: "+cursor.getString(3)+" Statusz: "+cursor.getString(4));
             }
-            adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listItem);
-            listkorabbip.setAdapter(adapter);
+            if (adapter == null) { // Ellenőrzi, hogy az adapter null értékű-e
+                adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listItem);
+                listkorabbip.setAdapter(adapter);
+            } else {
+                adapter.notifyDataSetChanged(); // Ha az adapter nem null, akkor csak értesíti, hogy az adatok megváltoztak.
+            }
         }
     }
 }

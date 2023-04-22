@@ -37,13 +37,13 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="51dp"
+        android:layout_height="60dp"
         android:background="#85171616">
 
         <EditText
             android:id="@+id/idmegad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="56dp"
+            android:layout_height="60dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -51,9 +51,21 @@
 
         <Button
             android:id="@+id/torolbtnkorabb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:text="Töröl" />
+
+        <Button
+            android:id="@+id/start_project_button"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:text="Projekt indítása" />
+
+        <Button
+            android:id="@+id/end_project_button"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:text="Projekt lezárása" />
     </TableRow>
 
     <ImageView
@@ -61,5 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/pngegg" />
+
+
 
 </LinearLayout>
