@@ -220,6 +220,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context, "Sikeres", Toast.LENGTH_SHORT).show();
         }
 
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("megrendelo", megrendelo);
+        map.put("datum", termek);
+        map.put("arak", Integer.toString(darab));
+
+        Call<Void> call = retroInterface.addtermekrendeles(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

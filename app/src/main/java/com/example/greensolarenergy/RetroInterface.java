@@ -13,6 +13,8 @@ public interface RetroInterface {
     @POST("/megrendelesek")
     Call<Void> addmegrendelesek (@Body  HashMap<String, String> map);
 
+    @POST("/addtermekrendeles")
+    Call<Void> addtermekrendeles (@Body  HashMap<String, String> map);
 
 //    Call<Void> execute2 (@Body HashMap<String, String> map);
 }
