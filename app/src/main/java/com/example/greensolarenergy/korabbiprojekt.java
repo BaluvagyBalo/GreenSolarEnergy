@@ -52,8 +52,15 @@ public class korabbiprojekt extends AppCompatActivity {
         sharedPref_k = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String Userf = sharedPref_k.getString(getString(R.string.last_user_key), "");
 
+
         if(Userf.equals("felmero")){
+            startProjectButton.setEnabled(false);
             toroltbtnkorabb.setEnabled(false);
+        } else if(Userf.equals("raktaros")){
+            endProjectButton.setEnabled(false);
+        } else if(Userf.equals("raktarvezeto")){
+            endProjectButton.setEnabled(false);
+            startProjectButton.setEnabled(false);
         }
 
 
