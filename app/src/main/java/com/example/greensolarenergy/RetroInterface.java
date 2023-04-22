@@ -10,6 +10,8 @@ public interface RetroInterface {
 
     @POST("/hello")
     Call<Void> execute (@Body HashMap<String, String> map);
+    @POST("/megrendelesek")
+    Call<Void> addmegrendelesek (@Body  HashMap<String, String> map);
 
 
 //    Call<Void> execute2 (@Body HashMap<String, String> map);

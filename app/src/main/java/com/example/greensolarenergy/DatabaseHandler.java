@@ -131,9 +131,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           @Override
           public void onResponse(Call<Void> call, Response<Void> response) {
               if (response.code() == 200) {
-                  Toast.makeText(context, "yeah", Toast.LENGTH_LONG).show();
+                  Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
               } else {
-                  Toast.makeText(context, "fuck", Toast.LENGTH_LONG).show();
+                  Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
               }
           }
 
@@ -162,6 +162,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         Log.d("DatabaseHandler", "addMegrendeles result: " + result);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("megrendelo", megrendelo);
+        map.put("datum", datum);
+        map.put("arak", Integer.toString(arak));
+
+        Call<Void> call = retroInterface.addmegrendelesek(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 
@@ -206,7 +238,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return adatokListaja;
     }
-
+//
     //törles serialnumber alapjan raktar
     void deleteRaktarData(int serialNumber){
         SQLiteDatabase db = this.getWritableDatabase();
