@@ -250,7 +250,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     //kiir
