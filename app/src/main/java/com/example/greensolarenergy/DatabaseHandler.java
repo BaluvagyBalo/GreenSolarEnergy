@@ -163,6 +163,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Log.d("DatabaseHandler", "addMegrendeles result: " + result);
 
+
+
+
+
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
