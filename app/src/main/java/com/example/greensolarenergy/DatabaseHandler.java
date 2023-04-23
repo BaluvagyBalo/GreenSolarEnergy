@@ -49,7 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private  static  final  String osszeg= "Osszeg";
 
 
-    private static final String Statusz = "Statusz";
+
 
     //Table 3
     private  static  final String azon = "Azon";
