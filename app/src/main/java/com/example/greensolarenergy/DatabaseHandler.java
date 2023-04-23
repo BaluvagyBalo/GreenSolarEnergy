@@ -346,6 +346,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
         db.close();
+
     }
 
     void projektlezaras(int serialNumber){
@@ -361,6 +362,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
         db.close();
+
     }
 
 
