@@ -111,6 +111,7 @@ public class korabbiprojekt extends AppCompatActivity {
                 listkorabbip.setAdapter(adapter);
             } else {
                 adapter.notifyDataSetChanged(); // Ha az adapter nem null, akkor csak értesíti, hogy az adatok megváltoztak.
+
             }
         }
     }
