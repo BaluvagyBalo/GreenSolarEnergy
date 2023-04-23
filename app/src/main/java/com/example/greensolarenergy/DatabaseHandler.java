@@ -48,6 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static  final String Datum ="Datum";
     private  static  final  String osszeg= "Osszeg";
 
+
     private static final String Statusz = "Statusz";
 
     //Table 3
