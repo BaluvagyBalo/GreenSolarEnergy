@@ -8,13 +8,28 @@ import retrofit2.http.POST;
 
 public interface RetroInterface {
 
-    @POST("/hello")
+    @POST("/addraktar")
     Call<Void> execute (@Body HashMap<String, String> map);
+
     @POST("/megrendelesek")
     Call<Void> addmegrendelesek (@Body  HashMap<String, String> map);
 
     @POST("/addtermekrendeles")
     Call<Void> addtermekrendeles (@Body  HashMap<String, String> map);
 
-//    Call<Void> execute2 (@Body HashMap<String, String> map);
+    @POST("/deleteraktardata")
+    Call<Void> deleteraktardata (@Body  HashMap<String, String> map);
+
+    @POST("/deletemegrendelesekdata")
+    Call<Void> deletemegrendelesekdata (@Body  HashMap<String, String> map);
+
+    @POST("/updatefolyamatba")
+    Call<Void> updatefolyamatba (@Body  HashMap<String, String> map); //megrendelesek
+
+    @POST("/updatelezarva")
+    Call<Void> updatelezarva (@Body  HashMap<String, String> map);
+
+    @POST("/updateprice")
+    Call<Void> updateprice (@Body  HashMap<String, String> map); //raktar
+
 }

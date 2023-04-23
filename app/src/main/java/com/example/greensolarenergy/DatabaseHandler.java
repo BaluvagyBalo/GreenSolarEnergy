@@ -180,6 +180,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         map.put("megrendelo", megrendelo);
         map.put("datum", datum);
         map.put("arak", Integer.toString(arak));
+        map.put("statusz", "rogzitve");
 
         Call<Void> call = retroInterface.addmegrendelesek(map);
 
@@ -230,8 +231,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         HashMap<String, String> map = new HashMap<>();
 
         map.put("megrendelo", megrendelo);
-        map.put("datum", termek);
-        map.put("arak", Integer.toString(darab));
+        map.put("termek", termek);
+        map.put("darabszam", Integer.toString(darab));
 
         Call<Void> call = retroInterface.addtermekrendeles(map);
 
@@ -283,6 +284,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
         db.close();
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("serialnumber", Integer.toString(serialNumber));
+
+        Call<Void> call = retroInterface.deleteraktardata(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
@@ -332,6 +363,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
         db.close();
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("id", Integer.toString(serialNumber));
+
+        Call<Void> call = retroInterface.deletemegrendelesekdata(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     void projektinditas(int serialNumber){
@@ -347,6 +409,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
         db.close();
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("id", Integer.toString(serialNumber));
+        map.put("statusz", "folyamatban");
+
+        Call<Void> call = retroInterface.updatefolyamatba(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -364,6 +457,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         db.close();
 
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("id", Integer.toString(serialNumber));
+        map.put("statusz", "lezarva");
+
+        Call<Void> call = retroInterface.updatelezarva(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 
@@ -374,9 +498,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     void modifydata(int serialNumber, int price){
         SQLiteDatabase db = this.getWritableDatabase();
 
-
-
-
         db.execSQL("UPDATE "+TABLE_NAME+" SET AR = "+"'"+price+"' "+ "WHERE SERIALNUMBER = "+"'"+serialNumber+"'");
 
       /*  if(result == 0){
@@ -386,6 +507,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }*/
 
         db.close();
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retroInterface = retrofit.create(RetroInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("id", Integer.toString(serialNumber));
+        map.put("ar", Integer.toString(price));
+
+        Call<Void> call = retroInterface.updateprice(map);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(context, "Sikeres", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, "Sikertelen", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 }
