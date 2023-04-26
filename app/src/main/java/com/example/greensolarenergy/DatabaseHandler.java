@@ -167,6 +167,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Log.d("DatabaseHandler", "addMegrendeles result: " + result);
 
+        String s = "rogzitve";
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -180,7 +181,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         map.put("megrendelo", megrendelo);
         map.put("datum", datum);
         map.put("arak", Integer.toString(arak));
-        map.put("statusz", "rogzitve");
+        map.put("statusz", s);
 
         Call<Void> call = retroInterface.addmegrendelesek(map);
 
