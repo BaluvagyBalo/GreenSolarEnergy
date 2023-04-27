@@ -49,21 +49,24 @@
             android:minHeight="48dp"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/torolbtnkorabb"
+            android:background="@drawable/szinvalto"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Töröl" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_project_button"
             android:layout_width="125dp"
+            android:background="@drawable/szinvalto"
             android:layout_height="match_parent"
             android:text="Projekt indítása" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/end_project_button"
             android:layout_width="125dp"
+            android:background="@drawable/szinvalto"
             android:layout_height="match_parent"
             android:text="Projekt lezárása" />
     </TableRow>

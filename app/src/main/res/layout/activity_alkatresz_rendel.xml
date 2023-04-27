@@ -63,9 +63,10 @@
         android:inputType="number"
         android:minHeight="48dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/megrendel_btn"
         android:layout_width="match_parent"
+        android:background="@drawable/szinvalto"
         android:layout_height="wrap_content"
         android:text="Megrendel" />
 

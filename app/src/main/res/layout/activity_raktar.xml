@@ -51,8 +51,9 @@
             android:inputType="textPersonName"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/hozzaadasbtn"
+            android:background="@drawable/szinvalto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hozzaadas" />
@@ -77,19 +78,23 @@
                 android:textColor="#0B0A0A"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/torolmodosbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/szinvalto"
+
                 android:text="torol"
                 tools:ignore="TouchTargetSizeCheck" />
         </TableRow>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/listazasbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/szinvalto"
+
         android:text="Raktár kilistazasa" />
 
     <TableRow
@@ -118,11 +123,13 @@
             android:textColor="#0B0A0A"
             tools:ignore="TouchTargetSizeCheck" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/modosit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="modosít"
+            android:background="@drawable/szinvalto"
+
             tools:ignore="TouchTargetSizeCheck" />
 
     </TableRow>

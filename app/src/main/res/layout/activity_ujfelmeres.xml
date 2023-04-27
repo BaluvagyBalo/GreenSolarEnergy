@@ -330,9 +330,11 @@
                     android:textSize="20dp" />
             </TableRow>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/ajanlatkeres"
                 android:layout_width="match_parent"
+                android:background="@drawable/szinvalto"
+
                 android:layout_height="wrap_content"
                 android:text="Árkalkuláció" />
 
@@ -340,11 +342,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/ajanlat"
+                android:background="@drawable/szinvalto"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_light"
                 android:text="Árajánlat mentése" />
 
         </LinearLayout>
