@@ -75,13 +75,51 @@ public class raktar extends AppCompatActivity {
 
 
 
+        //map-rekesz
+
+        HashMap<Integer, Integer> hashMap =new HashMap<>();
+        hashMap.put(1,45);
+        hashMap.put(2,15);
+        hashMap.put(3,54);
+        hashMap.put(4,64);
+        hashMap.put(5,145);
+        hashMap.put(6,74);
+        hashMap.put(7,95);
+        hashMap.put(8,35);
+        hashMap.put(9,36);
+        hashMap.put(10,22);
+
+        //rekeszvege
+
         hozzaad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                raktarDB.addraktar(megnevezes.getText().toString().trim(),
-                        Integer.valueOf(darab.getText().toString().trim()),
-                        Integer.valueOf(ar.getText().toString().trim()),
-                        elhelyezkedes.getText().toString().trim());
+
+                //elhelyez
+                String elhelyez = elhelyezkedes.getText().toString();
+                String[] rekesz_1= elhelyez.split(",");
+                String uj2= rekesz_1[2];
+
+                int rekesz_szam= Integer.parseInt(uj2);
+
+                int darabszam= Integer.parseInt(darab.getText().toString());
+
+
+                if(hashMap.get(rekesz_szam)<darabszam){
+                    Toast.makeText(raktar.this,"Rekesz nem megfelelo!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    raktarDB.addraktar(megnevezes.getText().toString().trim(),
+                            Integer.valueOf(darab.getText().toString().trim()),
+                            Integer.valueOf(ar.getText().toString().trim()),
+                            elhelyezkedes.getText().toString().trim());
+                    //hasmap levonas a dinamikus map miatt
+
+
+
+                    hashMap.put(rekesz_szam,hashMap.get(rekesz_szam)-darabszam);
+                }
+
             }
         });
 
