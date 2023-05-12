@@ -1,5 +1,6 @@
 package com.example.greensolarenergy;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class raktar extends AppCompatActivity {
 
     EditText megnevezes, elhelyezkedes, darab, ar,id, idmodosit,armodosit;
-    Button hozzaad, listaz, torolmodosit,modosit;
+    Button hozzaad, listaz, torolmodosit,modosit, btnlistazhasmap;
    TextView text;
    ListView lista;
     DatabaseHandler raktarDB;
@@ -47,6 +49,7 @@ public class raktar extends AppCompatActivity {
         ar = findViewById(R.id.ar);
         hozzaad= findViewById(R.id.hozzaadasbtn);
         listaz =findViewById(R.id.listazasbtn);
+        btnlistazhasmap=findViewById(R.id.rekeszbtn);
 
         //modify
         idmodosit=findViewById(R.id.idmodosit);
@@ -74,7 +77,6 @@ public class raktar extends AppCompatActivity {
 
 
 
-
         //map-rekesz
 
         HashMap<Integer, Integer> hashMap =new HashMap<>();
@@ -88,6 +90,24 @@ public class raktar extends AppCompatActivity {
         hashMap.put(8,35);
         hashMap.put(9,36);
         hashMap.put(10,22);
+
+        btnlistazhasmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(raktar.this);
+                builder.setTitle("Data Map");
+
+                // Create a string to store the data
+                StringBuilder sb = new StringBuilder();
+                for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+                    sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                }
+
+                builder.setMessage(sb.toString());
+                builder.setPositiveButton("OK", null);
+                builder.show();
+            }
+        });
 
         //rekeszvege
 
@@ -173,4 +193,6 @@ public class raktar extends AppCompatActivity {
         }
 
     }
+    
+    
 }

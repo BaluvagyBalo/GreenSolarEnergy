@@ -156,7 +156,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cv.put(MEGRENDELO, megrendelo);
         cv.put(Datum, datum);
         cv.put(osszeg, arak);
-        cv.put(Statusz, "Rögzítve");;
+        cv.put(Statusz, "Rögzítve");
 
         long result = db.insert(TABLE_NAME2, null, cv);
         if(result == -1) {
@@ -222,12 +222,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context, "Sikeres", Toast.LENGTH_SHORT).show();
         }
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        retroInterface = retrofit.create(RetroInterface.class);
 
         HashMap<String, String> map = new HashMap<>();
 
@@ -285,6 +279,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Toast.makeText(context,"Sikeres",Toast.LENGTH_SHORT).show();
         }
         db.close();
+
+
+
+
 
 
         retrofit = new Retrofit.Builder()

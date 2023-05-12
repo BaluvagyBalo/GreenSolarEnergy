@@ -140,6 +140,12 @@
         android:layout_height="2dp"
         android:background="#121010" />
 
+    <Button
+        android:id="@+id/rekeszbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rekesz_szam" />
+
     <ListView
         android:id="@+id/lista"
         android:layout_width="match_parent"
