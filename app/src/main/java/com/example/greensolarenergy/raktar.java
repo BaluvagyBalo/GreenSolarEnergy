@@ -16,6 +16,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +42,9 @@ public class raktar extends AppCompatActivity {
     ArrayList<String> listItemraktar;
     ArrayAdapter adapterraktar;
     SharedPreferences sharedPrefr;
+     int darabszam;
+    private static final String PREF_NAME = "MyPrefs";
+    private static final String HASHMAP_KEY = "MyHashMap";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +75,8 @@ public class raktar extends AppCompatActivity {
         sharedPrefr = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         String User = sharedPrefr.getString(getString(R.string.last_user_key), "");
 
+
+
         if(User.equals("raktaros")){
             hozzaad.setEnabled(false);
             torolmodosit.setEnabled(false);
@@ -91,23 +100,35 @@ public class raktar extends AppCompatActivity {
         hashMap.put(9,36);
         hashMap.put(10,22);
 
+
+         //   saveHashMap(raktar.this, hashMap);
+
+
         btnlistazhasmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(raktar.this);
-                builder.setTitle("Data Map");
+                // Read the saved HashMap from SharedPreferences
+                HashMap<Integer, Integer> savedHashMap = readHashMap(raktar.this);
 
-                // Create a string to store the data
-                StringBuilder sb = new StringBuilder();
-                for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
-                    sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                if (savedHashMap != null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(raktar.this);
+                    builder.setTitle("Saved Data Map");
+
+                    // Create a string to store the data
+                    StringBuilder sb = new StringBuilder();
+                    for (Map.Entry<Integer, Integer> entry : savedHashMap.entrySet()) {
+                        sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                    }
+
+                    builder.setMessage(sb.toString());
+                    builder.setPositiveButton("OK", null);
+                    builder.show();
+                } else {
+                    Toast.makeText(raktar.this, "No saved HashMap found.", Toast.LENGTH_SHORT).show();
                 }
-
-                builder.setMessage(sb.toString());
-                builder.setPositiveButton("OK", null);
-                builder.show();
             }
         });
+
 
         //rekeszvege
 
@@ -117,31 +138,38 @@ public class raktar extends AppCompatActivity {
 
                 //elhelyez
                 String elhelyez = elhelyezkedes.getText().toString();
-                String[] rekesz_1= elhelyez.split(",");
-                String uj2= rekesz_1[2];
+                String[] rekesz_1 = elhelyez.split(",");
+                String uj2 = rekesz_1[2];
+                int rekesz_szam = Integer.parseInt(uj2);
+                darabszam = Integer.parseInt(darab.getText().toString().trim());
 
-                int rekesz_szam= Integer.parseInt(uj2);
+                // Retrieve the saved HashMap
+                HashMap<Integer, Integer> savedHashMap = readHashMap(raktar.this);
 
-                int darabszam= Integer.parseInt(darab.getText().toString());
+                // Check if the rekesz_szam exists in the HashMap
+                if (savedHashMap.containsKey(rekesz_szam)) {
+                    int availableDarabszam = savedHashMap.get(rekesz_szam);
+                    if (availableDarabszam < darabszam) {
+                        Toast.makeText(raktar.this, "Rekesz nem megfelelő!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        raktarDB.addraktar(megnevezes.getText().toString().trim(),
+                                Integer.valueOf(darab.getText().toString().trim()),
+                                Integer.valueOf(ar.getText().toString().trim()),
+                                elhelyezkedes.getText().toString().trim());
 
+                        // Update the value in the saved HashMap
+                        savedHashMap.put(rekesz_szam, availableDarabszam - darabszam);
 
-                if(hashMap.get(rekesz_szam)<darabszam){
-                    Toast.makeText(raktar.this,"Rekesz nem megfelelo!",Toast.LENGTH_SHORT).show();
+                        // Save the updated HashMap
+                        saveHashMap(raktar.this, savedHashMap);
+                    }
+                } else {
+                    Toast.makeText(raktar.this, "Rekesz nem található a raktárban!", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    raktarDB.addraktar(megnevezes.getText().toString().trim(),
-                            Integer.valueOf(darab.getText().toString().trim()),
-                            Integer.valueOf(ar.getText().toString().trim()),
-                            elhelyezkedes.getText().toString().trim());
-                    //hasmap levonas a dinamikus map miatt
-
-
-
-                    hashMap.put(rekesz_szam,hashMap.get(rekesz_szam)-darabszam);
-                }
-
             }
         });
+
+
 
         listaz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,6 +221,31 @@ public class raktar extends AppCompatActivity {
         }
 
     }
-    
-    
+
+    public static void saveHashMap(Context context, HashMap<Integer, Integer> hashMap) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        Gson gson = new Gson();
+        String hashMapJson = gson.toJson(hashMap);
+
+        editor.putString(HASHMAP_KEY, hashMapJson);
+        editor.apply();
+    }
+    public static HashMap<Integer, Integer> readHashMap(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        String hashMapJson = sharedPreferences.getString(HASHMAP_KEY, null);
+
+        if (hashMapJson != null) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<HashMap<Integer, Integer>>() {}.getType();
+            return gson.fromJson(hashMapJson, type);
+        }
+
+        // Return an empty HashMap if no saved data is found
+        return new HashMap<>();
+    }
+
+
+
 }
